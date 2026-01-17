@@ -4,42 +4,42 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-Sistema IoT que visualiza la canción actual de Spotify en una pantalla LCD física. Conecta el mundo digital con el hardware utilizando **Arduino** y un script de **Python** en segundo plano.
+An IoT system that visualizes the current Spotify track on a physical LCD screen. It bridges the digital and physical worlds using **Arduino** and a background **Python** script.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/b9bc75ae-46d7-4ad8-9bd6-127984fe2318" width="250" />
+  <img src="https://github.com/user-attachments/assets/51246f91-9100-40eb-9d30-fdd5fef1aae8" width="200" />
 </div>
 
 ---
 
-### 💡 Ingeniería del Proyecto (The Workaround)
+### 💡 The Engineering (The Workaround)
 
-**El Desafío:**
-Originalmente diseñado para usar la API oficial de Spotify. Sin embargo, debido a que Spotify for Developers deshabilitó la creación de nuevas apps (impidiendo obtener credenciales OAuth), fue necesario buscar una alternativa creativa.
+**The Challenge:**
+Originally designed to utilize the official Spotify API. However, since Spotify for Developers temporarily disabled the creation of new apps (blocking access to OAuth credentials), a creative alternative was required.
 
-**La Solución:**
-Implementé una técnica de monitoreo de procesos en **Windows** (`win32gui`). El script de Python:
-1.  Escanea las ventanas activas del sistema operativo.
-2.  Detecta el patrón `Artista - Canción` en el título de la ventana de Spotify.
-3.  Limpia y formatea los datos.
-4.  Los transmite vía Serial al microcontrolador.
+**The Solution:**
+I implemented a process monitoring technique on **Windows** (`win32gui`). The Python script:
+1.  Scans the OS active windows.
+2.  Detects the `Artist - Song` pattern in the Spotify window title.
+3.  Cleans and formats the data.
+4.  Transmits it via Serial to the microcontroller.
 
-> **Resultado:** Un sistema funcional que no depende de claves API externas ni conexión a internet en el microcontrolador.
+> **Result:** A fully functional system that does not depend on external API keys or internet connection on the microcontroller side.
 
 ---
 
-### 🛠️ Hardware y Software
+### 🛠️ Hardware & Software
 
-* **Placa:** Arduino Uno.
-* **Pantalla:** LCD 1602 (con potenciómetro para contraste).
-* **Lenguajes:** C++ (Arduino) y Python 3.x.
-* **Librerías Python:** `pyserial`, `pywin32`.
+* **Board:** Arduino Uno.
+* **Display:** LCD 1602 (with potentiometer for contrast).
+* **Languages:** C++ (Arduino) and Python 3.x.
+* **Python Libraries:** `pyserial`, `pywin32`.
 
-### 🔌 Conexiones (Pinout)
+### 🔌 Wiring (Pinout)
 
-Configuración para la librería `LiquidCrystal`:
+Configuration for the `LiquidCrystal` library:
 
-| LCD Pin | Arduino Pin | Descripción |
+| LCD Pin | Arduino Pin | Description |
 | :--- | :--- | :--- |
 | **RS** | 7 | Register Select |
 | **E** | 8 | Enable |
@@ -47,63 +47,62 @@ Configuración para la librería `LiquidCrystal`:
 | **D5** | 10 | Data 5 |
 | **D6** | 11 | Data 6 |
 | **D7** | 12 | Data 7 |
-| **RW** | GND | Escritura |
-| **V0** | Potenciómetro | Ajuste de contraste |
+| **RW** | GND | Write |
+| **V0** | Potentiometer | Contrast Adjustment |
 
 ---
 
-### 🚀 Guía de Instalación y Ejecución
+### 🚀 Installation & Setup Guide
 
-Sigue estos pasos en orden estricto para evitar conflictos con el puerto serie.
+Follow these steps strictly to avoid Serial Port conflicts.
 
-#### Paso 1: Carga el código en Arduino
-1.  Abre el archivo `Spotify_LCD.ino` en el IDE de Arduino.
-2.  Conecta tu placa al PC por USB.
-3.  Selecciona tu placa y puerto correcta.
-4.  Dale al botón **Subir** (Upload).
+#### Step 1: Flash the Arduino
+1.  Open `Spotify_LCD.ino` in Arduino IDE.
+2.  Connect your board via USB.
+3.  Select the correct Board and Port.
+4.  Click **Upload**.
 
-#### ⚠️ Paso 2: IMPORTANTE - Libera el Puerto
-**Una vez subido el código, CIERRA COMPLETAMENTE EL ARDUINO IDE.**
-> Si dejas el IDE abierto (o el Monitor Serie), Python no podrá acceder al puerto USB porque estará ocupado, lanzando un error de `Access Denied`.
+#### ⚠️ Step 2: IMPORTANT - Free the Port
+**Once uploaded, COMPLETELY CLOSE THE ARDUINO IDE.**
+> If you leave the IDE (or Serial Monitor) open, Python won't be able to access the USB port, triggering an `Access Denied` error.
 
-#### Paso 3: Prepara el entorno Python
-Abre una terminal (CMD o PowerShell) en la carpeta del proyecto e instala las dependencias:
+#### Step 3: Python Environment
+Open a terminal (CMD or PowerShell) in the project folder and install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-#### Paso 4: Configura el puerto
+#### Step 4: Port Configuration
 
-Abre el archivo `spotify_lcd.py` con un editor de texto (o VS Code) y verifica esta línea al principio:
+Open `spotify_lcd.py` with a text editor (or VS Code) and verify the port line:
 
 ```python
-SERIAL_PORT = 'COM3'  # <--- Asegúrate de que este es el puerto de tu Arduino
+SERIAL_PORT = 'COM3'  # <--- Make sure this matches your Arduino port
 ```
 
-#### Paso 5: ¡A funcionar!
+#### Step 5: Run it!
 
-1. Abre la aplicación de escritorio de Spotify y pon música.
-2. En tu terminal, ejecuta el script:
+1. Open the Spotify desktop app and play some music.
+2. In your terminal, run the script:
 
 ```bash
 python spotify_lcd.py
 ```
 
-3. Si todo va bien, verás en la terminal: *"Conectado a COM3. Esperando música..."* y tu pantalla LCD mostrará la canción actual.
+3. If successful, you'll see: *"Connected to COM3. Waiting for music..."* and your LCD will display the track.
 
 ---
 
-### 🐛 Solución de Problemas Frecuentes
+### 🐛 Troubleshooting
 
-* **Error `Access is denied`:** ¡No cerraste el Arduino IDE! Ciérralo y vuelve a ejecutar el script de Python.
-* **El LCD muestra cuadrados blancos:** Ajusta el potenciómetro de contraste en la parte trasera o en la protoboard.
-* **No detecta la canción:** Asegúrate de que estás usando la aplicación de escritorio de Spotify (no la web) y que no está minimizada en la bandeja del sistema.
+* **`Access is denied` Error:** You didn't close the Arduino IDE! Close it and run the Python script again.
+* **White squares on LCD:** Adjust the potentiometer on the back or breadboard to fix the contrast.
+* **Song not detected:** Ensure you are using the Spotify Desktop App (not the web player) and that it's not minimized to the system tray.
 
 ---
 
-### 📄 Licencia
+### 📄 License
 
-Proyecto desarrollado por **franlrs**. Distribuido bajo licencia [MIT](https://www.google.com/search?q=LICENSE).
-
+Project developed by **franlrs**. Distributed under the [MIT License](https://www.google.com/search?q=LICENSE).
 

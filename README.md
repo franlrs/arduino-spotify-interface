@@ -104,5 +104,6 @@ python spotify_lcd.py
 
 ### 📄 License
 
-Project developed by **franlrs**. Distributed under the [MIT License](https://www.google.com/search?q=LICENSE).
+Project developed by **franlrs**. Distributed under the [MIT License](https://www.google.com/search?q=MITLICENSE).
+
 

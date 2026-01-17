@@ -5,7 +5,7 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 void setup() {
   Serial.begin(9600);
   lcd.begin(16, 2);
-  lcd.print("Esperando payo");
+  lcd.print("Esperando cancion");
 }
 
 void loop() {

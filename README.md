@@ -7,8 +7,7 @@
 Sistema IoT que visualiza la canción actual de Spotify en una pantalla LCD física. Conecta el mundo digital con el hardware utilizando **Arduino** y un script de **Python** en segundo plano.
 
 <div align="center">
-  <img src="![demo](https://github.com/user-attachments/assets/b9bc75ae-46d7-4ad8-9bd6-127984fe2318)
-" width="250" />
+  <img src="https://github.com/user-attachments/assets/b9bc75ae-46d7-4ad8-9bd6-127984fe2318" width="250" />
 </div>
 
 ---
@@ -106,4 +105,5 @@ python spotify_lcd.py
 ### 📄 Licencia
 
 Proyecto desarrollado por **franlrs**. Distribuido bajo licencia [MIT](https://www.google.com/search?q=LICENSE).
+
 
